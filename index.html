@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inheritance and Prototype</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Inheritance and Prototype</h1>
+    <br>
+    <hr>
+    <h2>Q1 Create 2 objects - parent and child. Attach methods to parent and use those methods in child object using
+        parents prototype</h2>
+    <br>
+    <pre>class Parent {
+            constructor(name) {
+              this.name = name;
+            }
+          
+            sayHello() {
+              console.log(`Hello, I'm ${this.name}`);
+            }
+          }
+          
+          
+          class Child extends Parent {
+            constructor(name, age) {
+              super(name);
+              this.age = age;
+            }
+          
+            greet() {
+              this.sayHello(); 
+              console.log(`I'm ${this.age} years old.`);
+            }
+          }
+          
+          const parentObj = new Parent("Nayan");
+          const childObj = new Child("Ronit", 28);
+          
+          parentObj.sayHello();
+          childObj.greet();</pre>
+    <br>
+    <p><b>Ans
+            <br>
+            Hello, I'm Nayan
+            <br>
+            Hello, I'm Ronit
+            <br>
+            I'm 28 years old
+        </b></p>
+    <hr>
+
+    <h2>Q2 Write code to explain prototype chaining</h2>
+    <br>
+    <pre>function Parent(){}
+
+            Parent.prototype.say = function () {
+            return 20;
+            };
+            
+            function Child(){
+            }
+            
+            Child.prototype.say = function () {
+            return 10;
+            };
+            
+            inherit(Child, Parent);
+            
+            function inherit(C, P) {
+            C.prototype = P.prototype;
+             } 
+            
+             var parent = new Parent();
+            var child = new Child();
+            
+            
+            var child2 = new Child()
+            alert(child.say());
+            alert(parent.say()); 
+            alert(child2.say()); </pre>
+    <br>
+    <p><b>Ans
+            <br>
+            20
+            <br>
+            20
+            <br>
+            20
+            <hr>
+        </b></p>
+
+    <h2>Q3 Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum
+        for multiple arrays</h2>
+        <br>
+        <pre>Array.prototype.sum = function() {
+            return this.reduce((acc, current) => acc + current, 0);
+          };
+          const arr1 = [1, 2, 3, 4, 5];
+          const arr2 = [10, 20, 30, 40, 50];
+          
+          console.log(arr1.sum());
+          console.log(arr2.sum());</pre>
+          <br>
+          <p><b>Ans
+            <br>
+            15
+            <br>150
+          </b></p>
+          <hr>
+
+          <h2>Q4 Write a JavaScript function to retrieve all the names of object's own and inherited properties.</h2>
+          <br>
+          <pre>function allKeys(obj) {
+            if (!isObject(obj)) return [];
+            var keys = [];
+            for (var key in obj) keys.push(key);
+            return keys;
+        }
+        function isObject(obj) 
+        {
+            var type = typeof obj;
+            return type === 'function' || type === 'object' && !!obj;
+          }
+        function Student(name) {
+          this.name = name;
+        }
+        Student.prototype.rollno = true;
+        console.log(allKeys(new Student("Sara")));
+        </pre>
+        <br>
+        <p><b>Ans
+            <br>
+            [ 'name', 'Nayan' ]
+        </b></p>
+        <hr>
+
+</body>
+
+</html>
